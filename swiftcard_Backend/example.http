@@ -1,0 +1,89 @@
+@local = http://localhost:3000
+
+POST  {{local}}/swift-card/users
+Content-Type: application/json
+
+{
+  "name": {
+    "first": "Ell",
+    "middle": "dd",
+    "last": "Vis"
+  },
+  "phone": "0512345566",
+  "email": "admin@email.com",
+  "password": "Abc!123Abc",
+  "image": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
+    "alt": "ad"
+  },
+  "address": {
+    "state": "IL",
+    "country": "Israel",
+    "city": "Arad",
+    "street": "Shoham",
+    "houseNumber": 5,
+    "zip": 8920435
+  },
+  "isBusiness": true,
+  "isAdmin":true
+}
+
+
+### login
+
+POST {{local}}/swift-card/users/login
+Content-Type: application/json
+
+{
+    "email":"ellvis7899981@email.com",
+    "password":"Abc!123Abc"
+}
+
+### Admin login
+
+POST {{local}}/swift-card/users/login
+Content-Type: application/json
+
+{
+    "email": "admin@email.com",
+    "password": "Abc!123Abc"
+}
+
+
+### get user
+GET {{local}}/swift-card/users/6823122fc18ee91dd8d17126
+Content-Type: application/json
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODIzMTIyZmMxOGVlOTFkZDhkMTcxMjYiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzQ3MTMxODEwfQ.Od0PejnMRZy8bb44N8SlhPWUi_A5LufGJGezbcIlM18
+
+### get all users (Admin)
+GET {{local}}/swift-card/users
+Content-Type: application/json
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODIzMzM2MzJiOTFjYTliMjU3MGU2YTgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDcxMzc0MjF9.X793TatsQiNRyPBF-Ps0stP2jYI1M2wK5Y2W-z1ihx0
+
+### update
+PUT {{local}}/swift-card/users/6823122fc18ee91dd8d17126
+Content-Type: application/json
+x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODIzMTIyZmMxOGVlOTFkZDhkMTcxMjYiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzQ3MTMxODEwfQ.Od0PejnMRZy8bb44N8SlhPWUi_A5LufGJGezbcIlM18
+
+{
+    "name": {
+      "first": "Elliiii",
+      "middle": "dd",
+      "last": "Vis"
+    },
+    "address": {
+      "state": "IL",
+      "country": "Israel",
+      "city": "Arad",
+      "street": "Shoham",
+      "houseNumber": 5,
+      "zip": 8920435
+    },
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
+      "alt": "ad"
+    },
+    "phone": "0512345568",
+    "email": "admin@email.com"
+}
+    
