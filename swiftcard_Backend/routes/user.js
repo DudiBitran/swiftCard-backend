@@ -102,4 +102,44 @@ router.put("/:id", authMw, async (req, res) => {
   res.send(updatedUser);
 });
 
+router.patch("/:id", authMw, async (req, res) => {
+  // input validation
+  if (req.user._id !== req.params.id) {
+    res.status(400).send("Access denied");
+    return;
+  }
+  // system validation
+  const user = await User.findById({ _id: req.user._id });
+  if (!user) {
+    res.status(400).send("User not found.");
+    return;
+  }
+  // process
+  const userStatusUpdated = await User.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $set: { isBusiness: !user.isBusiness } },
+    { new: true, runValidators: true }
+  );
+  // response
+  res.send(userStatusUpdated);
+});
+
+router.delete("/:id", authMw, async (req, res) => {
+  // input validation
+  if (req.user._id !== req.params.id && !req.user.isAdmin) {
+    res.status(400).send("Access denied");
+    return;
+  }
+  // system validation
+  const user = await User.findById({ _id: req.user._id });
+  if (!user) {
+    res.status(400).send("User not found.");
+    return;
+  }
+  // process
+  const deletedUser = await User.findByIdAndDelete({ _id: req.user._id });
+  // response
+  res.send(deletedUser);
+});
+
 module.exports = router;

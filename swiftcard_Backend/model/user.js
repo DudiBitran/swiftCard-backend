@@ -76,6 +76,7 @@ const userSchema = new mongoose.Schema({
       type: Number,
       min: 1,
       max: 9999999,
+      default: 0,
       required: true,
     },
   },
@@ -102,6 +103,14 @@ const userSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+});
+
+userSchema.set("toJSON", {
+  transform: function (doc, ret) {
+    delete ret.__v;
+    delete ret.password;
+    return ret;
   },
 });
 

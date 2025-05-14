@@ -1,5 +1,8 @@
 @local = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI0ZDI2NDQyMzc5ZGRiMTYxNDAzMDgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDcyNDM2MzZ9.FQMV4TtheDuCzmF-xSJ3YR4-zF3YwdQHzz4fB7ff9Rw
+@adminToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI0ZDI2NDQyMzc5ZGRiMTYxNDAzMDgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDcyNDM2MzZ9.FQMV4TtheDuCzmF-xSJ3YR4-zF3YwdQHzz4fB7ff9Rw
 
+### user sign up
 POST  {{local}}/swift-card/users
 Content-Type: application/json
 
@@ -10,7 +13,7 @@ Content-Type: application/json
     "last": "Vis"
   },
   "phone": "0512345566",
-  "email": "admin@email.com",
+  "email": "eli1@email.com",
   "password": "Abc!123Abc",
   "image": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
@@ -35,7 +38,7 @@ POST {{local}}/swift-card/users/login
 Content-Type: application/json
 
 {
-    "email":"ellvis7899981@email.com",
+    "email":"eli@email.com",
     "password":"Abc!123Abc"
 }
 
@@ -53,17 +56,17 @@ Content-Type: application/json
 ### get user
 GET {{local}}/swift-card/users/6823122fc18ee91dd8d17126
 Content-Type: application/json
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODIzMTIyZmMxOGVlOTFkZDhkMTcxMjYiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzQ3MTMxODEwfQ.Od0PejnMRZy8bb44N8SlhPWUi_A5LufGJGezbcIlM18
+x-auth-token:{{token}}
 
 ### get all users (Admin)
 GET {{local}}/swift-card/users
 Content-Type: application/json
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODIzMzM2MzJiOTFjYTliMjU3MGU2YTgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDcxMzc0MjF9.X793TatsQiNRyPBF-Ps0stP2jYI1M2wK5Y2W-z1ihx0
+x-auth-token:{{adminToken}}
 
 ### update
 PUT {{local}}/swift-card/users/6823122fc18ee91dd8d17126
 Content-Type: application/json
-x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODIzMTIyZmMxOGVlOTFkZDhkMTcxMjYiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzQ3MTMxODEwfQ.Od0PejnMRZy8bb44N8SlhPWUi_A5LufGJGezbcIlM18
+x-auth-token: {{token}}
 
 {
     "name": {
@@ -81,9 +84,44 @@ x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODIzMTIyZmMxOGVlOT
     },
     "image": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
-      "alt": "ad"
+      "alt": "add"
     },
     "phone": "0512345568",
-    "email": "admin@email.com"
+    "email": "admin1@email.com"
 }
     
+### Patch changing isBusiness status
+PATCH {{local}}/swift-card/users/6824d26442379ddb16140308
+Content-Type: application/json
+x-auth-token:{{token}}
+
+### Delete user 
+DELETE {{local}}/swift-card/users/6824d26442379ddb16140308
+Content-Type: application/json
+x-auth-token:{{adminToken}}
+
+### Post Card 
+POST {{local}}/swift-card/cards
+Content-Type: application/json
+x-auth-token:{{token}}
+
+{
+  "title": "a wonderful new card updated!",
+  "subtitle": "a test value for this card",
+  "description": "a test value for new card\na test value for new card\n",
+  "phone": "0123211234",
+  "email": "qwe@gmail.com",
+  "web": "https://www.bing.com",
+  "image": {
+    "url": "https://img.izismile.com/img/img13/20201030/640/you_have_never_seen_something_like_this_640_36.jpg",
+    "alt": "image of something"
+  },
+  "address": {
+    "state": "IL",
+    "country": "Israel",
+    "city": "Arad",
+    "street": "Shoham",
+    "houseNumber": 5,
+    "zip": 8920435
+  }
+}
