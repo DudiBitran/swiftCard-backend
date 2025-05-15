@@ -91,6 +91,8 @@ const cardSchema = new mongoose.Schema({
     type: Number,
     min: 100,
     max: 999_999_999,
+    required: true,
+    unique: true,
   },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -111,6 +113,16 @@ cardSchema.set("toJSON", {
   },
 });
 
+const generateBizNumber = async () => {
+  while (true) {
+    const number = _.random(100, 999_999_999);
+    const isExist = await Card.findOne({ bizNumber: number });
+    if (!isExist) {
+      return number;
+    }
+  }
+};
+
 const Card = mongoose.model("Card", cardSchema, "cards");
 
 const cardValidation = Joi.object({
@@ -122,10 +134,10 @@ const cardValidation = Joi.object({
     .pattern(/^0\d{9}$/)
     .required(),
   web: Joi.string()
-    .uri({ scheme: ["http", "https"] }) // רק http/https
+    .uri({ scheme: ["http", "https"] })
     .min(11)
     .max(1024)
-    .allow("", null) // מאפשר ריק אם זה שדה לא חובה
+    .allow("", null)
     .label("Website"),
   email: Joi.string().email().min(6).max(255).required(),
   image: Joi.object({
@@ -157,9 +169,11 @@ const cardValidation = Joi.object({
     houseNumber: Joi.number().min(1).max(99999).required().label("houseNumber"),
     zip: Joi.number().min(1).max(9999999).required().label("zip"),
   }).required(),
+  bizNumber: Joi.number().min(100).max(999_999_999),
 });
 
 module.exports = {
   Card,
   cardValidation,
+  generateBizNumber,
 };

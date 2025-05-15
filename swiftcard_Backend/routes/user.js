@@ -58,7 +58,7 @@ router.get("/", authMw, async (req, res) => {
   }
 
   const allUsers = await User.find();
-  if (!allUsers) {
+  if (allUsers.length === 0) {
     res.status(400).send("No user found.");
     return;
   }

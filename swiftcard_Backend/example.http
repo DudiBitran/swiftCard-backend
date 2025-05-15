@@ -1,4 +1,5 @@
 @local = http://localhost:3000
+@token2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI1ZmI2OTc1MjhkN2IxY2I3ZWI5NjgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDczMTk2ODV9.4hGApWQFcG9v4rV0cNjSy3DC8q-lg2_wDYNcWPu6QqM
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI0ZDI2NDQyMzc5ZGRiMTYxNDAzMDgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDcyNDM2MzZ9.FQMV4TtheDuCzmF-xSJ3YR4-zF3YwdQHzz4fB7ff9Rw
 @adminToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI0ZDI2NDQyMzc5ZGRiMTYxNDAzMDgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDcyNDM2MzZ9.FQMV4TtheDuCzmF-xSJ3YR4-zF3YwdQHzz4fB7ff9Rw
 
@@ -13,7 +14,7 @@ Content-Type: application/json
     "last": "Vis"
   },
   "phone": "0512345566",
-  "email": "eli1@email.com",
+  "email": "eli2@email.com",
   "password": "Abc!123Abc",
   "image": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
@@ -38,8 +39,8 @@ POST {{local}}/swift-card/users/login
 Content-Type: application/json
 
 {
-    "email":"eli@email.com",
-    "password":"Abc!123Abc"
+     "email": "eli2@email.com",
+  "password": "Abc!123Abc"
 }
 
 ### Admin login
@@ -103,14 +104,14 @@ x-auth-token:{{adminToken}}
 ### Post Card 
 POST {{local}}/swift-card/cards
 Content-Type: application/json
-x-auth-token:{{token}}
+x-auth-token:{{token2}}
 
 {
   "title": "a wonderful new card updated!",
   "subtitle": "a test value for this card",
   "description": "a test value for new card\na test value for new card\n",
   "phone": "0123211234",
-  "email": "qwe@gmail.com",
+  "email": "aaaa@gmail.com",
   "web": "https://www.bing.com",
   "image": {
     "url": "https://img.izismile.com/img/img13/20201030/640/you_have_never_seen_something_like_this_640_36.jpg",
@@ -125,3 +126,11 @@ x-auth-token:{{token}}
     "zip": 8920435
   }
 }
+
+### Get Cards
+GET {{local}}/swift-card/cards
+
+
+### Get my cards
+GET {{local}}/swift-card/cards/my-cards
+x-auth-token: {{token}}
