@@ -31,6 +31,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     minlength: 5,
     required: true,
+    unique: true,
   },
   web: {
     type: String,
@@ -125,7 +126,7 @@ const generateBizNumber = async () => {
 
 const Card = mongoose.model("Card", cardSchema, "cards");
 
-const cardValidation = Joi.object({
+const Validation = {
   title: Joi.string().min(2).max(256).required().label("title"),
   subtitle: Joi.string().min(2).max(256).required().label("subtitle"),
   description: Joi.string().min(2).max(1024).required().label("description"),
@@ -170,10 +171,28 @@ const cardValidation = Joi.object({
     zip: Joi.number().min(1).max(9999999).required().label("zip"),
   }).required(),
   bizNumber: Joi.number().min(100).max(999_999_999),
-});
+};
+
+const cardUpdateValidation = Joi.object(
+  _.pick(Validation, [
+    "title",
+    "subtitle",
+    "description",
+    "phone",
+    "web",
+    "email",
+    "image",
+    "address",
+  ])
+);
+const cardValidation = Joi.object(Validation).required();
+
+const bizNumberValidation = Joi.object(_.pick(Validation, ["bizNumber"]));
 
 module.exports = {
   Card,
   cardValidation,
   generateBizNumber,
+  cardUpdateValidation,
+  bizNumberValidation,
 };

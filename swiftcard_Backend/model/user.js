@@ -100,6 +100,14 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  loginAttempts: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  lockUntil: {
+    type: Date,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -110,9 +118,15 @@ userSchema.set("toJSON", {
   transform: function (doc, ret) {
     delete ret.__v;
     delete ret.password;
+    delete loginAttempts;
+    delete lockUntil;
     return ret;
   },
 });
+
+userSchema.methods.isLocked = function () {
+  return this.lockUntil && this.lockUntil > Date.now();
+};
 
 const User = mongoose.model("User", userSchema, "users");
 
@@ -171,6 +185,8 @@ const Validation = {
   isBusiness: Joi.boolean().required(),
 
   isAdmin: Joi.boolean().default(false),
+  loginAttempts: Joi.number().default(0),
+  lockUntil: Joi.date(),
 };
 
 const userValidate = Joi.object(Validation).required();
@@ -186,4 +202,5 @@ module.exports = {
   userValidate,
   signInValidation,
   updateValidation,
+  userSchema,
 };

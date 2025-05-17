@@ -23,6 +23,8 @@ router.post("/", async (req, res) => {
   user = await new User({
     ...req.body,
     password: await bcrypt.hash(req.body.password, 14),
+    loginAttempts: 0,
+    lockUntil: undefined,
   }).save();
 
   //response

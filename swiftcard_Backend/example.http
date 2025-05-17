@@ -1,6 +1,6 @@
 @local = http://localhost:3000
 @token2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI1ZmI2OTc1MjhkN2IxY2I3ZWI5NjgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDczMTk2ODV9.4hGApWQFcG9v4rV0cNjSy3DC8q-lg2_wDYNcWPu6QqM
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI0ZDI2NDQyMzc5ZGRiMTYxNDAzMDgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDcyNDM2MzZ9.FQMV4TtheDuCzmF-xSJ3YR4-zF3YwdQHzz4fB7ff9Rw
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI3YWU1NmEzNmQwYjlkNTkxNjNhNjgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzQ3NDMxNDg2fQ.oK3Xeql_olgN2YrvKgKFXqkaYIKbstlEqotSpD88E1A
 @adminToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI0ZDI2NDQyMzc5ZGRiMTYxNDAzMDgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDcyNDM2MzZ9.FQMV4TtheDuCzmF-xSJ3YR4-zF3YwdQHzz4fB7ff9Rw
 
 ### user sign up
@@ -14,7 +14,7 @@ Content-Type: application/json
     "last": "Vis"
   },
   "phone": "0512345566",
-  "email": "eli2@email.com",
+  "email": "eli2311@email.com",
   "password": "Abc!123Abc",
   "image": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
@@ -28,8 +28,8 @@ Content-Type: application/json
     "houseNumber": 5,
     "zip": 8920435
   },
-  "isBusiness": true,
-  "isAdmin":true
+  "isBusiness": true
+  
 }
 
 
@@ -39,8 +39,8 @@ POST {{local}}/swift-card/users/login
 Content-Type: application/json
 
 {
-     "email": "eli2@email.com",
-  "password": "Abc!123Abc"
+  "email": "eli2311@email.com",
+  "password": "Abc1!123Abc"
 }
 
 ### Admin login
@@ -92,26 +92,26 @@ x-auth-token: {{token}}
 }
     
 ### Patch changing isBusiness status
-PATCH {{local}}/swift-card/users/6824d26442379ddb16140308
+PATCH {{local}}/swift-card/users/6827ae56a36d0b9d59163a68
 Content-Type: application/json
 x-auth-token:{{token}}
 
 ### Delete user 
-DELETE {{local}}/swift-card/users/6824d26442379ddb16140308
+DELETE {{local}}/swift-card/users/6827ae56a36d0b9d59163a68
 Content-Type: application/json
 x-auth-token:{{adminToken}}
 
 ### Post Card 
 POST {{local}}/swift-card/cards
 Content-Type: application/json
-x-auth-token:{{token2}}
+x-auth-token:{{token}}
 
 {
   "title": "a wonderful new card updated!",
   "subtitle": "a test value for this card",
-  "description": "a test value for new card\na test value for new card\n",
-  "phone": "0123211234",
-  "email": "aaaa@gmail.com",
+  "description": "a test1112 value for new card\na test value for new card\n",
+  "phone": "0123211200",
+  "email": "aaaa23@gmail.com",
   "web": "https://www.bing.com",
   "image": {
     "url": "https://img.izismile.com/img/img13/20201030/640/you_have_never_seen_something_like_this_640_36.jpg",
@@ -134,3 +134,51 @@ GET {{local}}/swift-card/cards
 ### Get my cards
 GET {{local}}/swift-card/cards/my-cards
 x-auth-token: {{token}}
+
+### get card
+GET {{local}}/swift-card/cards/6825fb1e7528d7b1cb7eb964
+
+### Put update own card
+PUT {{local}}/swift-card/cards/6825fb1d7528d7b1cb7eb961
+x-auth-token: {{token2}}
+Content-Type: application/json
+
+{
+   "title": "a wonderful new card updated!",
+  "subtitle": "a test11114445 value for this card",
+  "description": "a test1 value for new card\na test value for new card\n",
+  "phone": "0123211200",
+  "email": "aaaa@gmail.com",
+  "web": "https://www.bing.com",
+  "image": {
+    "url": "https://img.izismile.com/img/img13/20201030/640/you_have_never_seen_something_like_this_640_36.jpg",
+    "alt": "image of something"
+  },
+  "address": {
+    "state": "IL",
+    "country": "Israel",
+    "city": "Arad1",
+    "street": "Shoham1",
+    "houseNumber": 5,
+    "zip": 8920435
+  }
+}
+
+
+### Patch like option
+PATCH {{local}}/swift-card/cards/6825fb1d7528d7b1cb7eb961
+x-auth-token: {{token}}
+Content-Type: application/json
+
+### Delete own card
+DELETE  {{local}}/swift-card/cards/6827b0590fd17fa3d5b50785
+x-auth-token:{{token}}
+
+### bizNumber change (Admin)
+PATCH {{local}}/swift-card/cards/biz-number/6827b0fb6f5373fd4de61c27
+x-auth-token: {{adminToken}}
+Content-Type: application/json
+
+{
+  "bizNumber":"55684421"
+}
