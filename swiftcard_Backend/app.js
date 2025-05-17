@@ -8,21 +8,20 @@ const app = express();
 morgan.token("time", () => {
   return new Date().toLocaleTimeString();
 });
-
 const customFormat =
   "[:time] :method :url :status :response-time ms - :res[content-length]";
 
+app.use(cors());
 app.use(morgan(customFormat));
 app.use(express.json());
 app.use("/swift-card/users", require("./routes/user"));
 app.use("/swift-card/users/login", require("./routes/login"));
 app.use("/swift-card/cards", require("./routes/card"));
 
-app.use(cors());
 const PORT = process.env.PORT ?? 3000;
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_ATLAS_URI)
   .then(() => {
     console.log("Connected to DB");
     app.listen(PORT, () => {

@@ -1,6 +1,6 @@
 @local = http://localhost:3000
 @token2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI1ZmI2OTc1MjhkN2IxY2I3ZWI5NjgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDczMTk2ODV9.4hGApWQFcG9v4rV0cNjSy3DC8q-lg2_wDYNcWPu6QqM
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI3YWU1NmEzNmQwYjlkNTkxNjNhNjgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzQ3NDMxNDg2fQ.oK3Xeql_olgN2YrvKgKFXqkaYIKbstlEqotSpD88E1A
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI4ZTdjNmUwZWM1ZjNhYTc5Mjc2MTQiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzQ3NTExMzM2fQ.w-Ocp_8XXdw_xsbox6S4VsTBcW340DcfDLXMYT8g0MM
 @adminToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI0ZDI2NDQyMzc5ZGRiMTYxNDAzMDgiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NDcyNDM2MzZ9.FQMV4TtheDuCzmF-xSJ3YR4-zF3YwdQHzz4fB7ff9Rw
 
 ### user sign up
@@ -9,12 +9,12 @@ Content-Type: application/json
 
 {
   "name": {
-    "first": "Ell",
+    "first": "Et",
     "middle": "dd",
     "last": "Vis"
   },
   "phone": "0512345566",
-  "email": "eli2311@email.com",
+  "email": "eli23111@email.com",
   "password": "Abc!123Abc",
   "image": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
@@ -39,8 +39,8 @@ POST {{local}}/swift-card/users/login
 Content-Type: application/json
 
 {
-  "email": "eli2311@email.com",
-  "password": "Abc1!123Abc"
+  "email": "eli23111@email.com",
+  "password": "Abc!123Abc"
 }
 
 ### Admin login
@@ -55,9 +55,9 @@ Content-Type: application/json
 
 
 ### get user
-GET {{local}}/swift-card/users/6823122fc18ee91dd8d17126
+GET {{local}}/swift-card/users/6827c26d910fb7cdbe6cf8ae
 Content-Type: application/json
-x-auth-token:{{token}}
+x-auth-token:{{adminToken}}
 
 ### get all users (Admin)
 GET {{local}}/swift-card/users
@@ -65,7 +65,7 @@ Content-Type: application/json
 x-auth-token:{{adminToken}}
 
 ### update
-PUT {{local}}/swift-card/users/6823122fc18ee91dd8d17126
+PUT {{local}}/swift-card/users/6828e7c6e0ec5f3aa7927614
 Content-Type: application/json
 x-auth-token: {{token}}
 
@@ -76,7 +76,7 @@ x-auth-token: {{token}}
       "last": "Vis"
     },
     "address": {
-      "state": "IL",
+      "state": "ILLL",
       "country": "Israel",
       "city": "Arad",
       "street": "Shoham",
@@ -166,12 +166,12 @@ Content-Type: application/json
 
 
 ### Patch like option
-PATCH {{local}}/swift-card/cards/6825fb1d7528d7b1cb7eb961
+PATCH {{local}}/swift-card/cards/6828e8d9e0ec5f3aa792761d
 x-auth-token: {{token}}
 Content-Type: application/json
 
 ### Delete own card
-DELETE  {{local}}/swift-card/cards/6827b0590fd17fa3d5b50785
+DELETE  {{local}}/swift-card/cards/6828e8d9e0ec5f3aa792761d
 x-auth-token:{{token}}
 
 ### bizNumber change (Admin)
@@ -182,3 +182,6 @@ Content-Type: application/json
 {
   "bizNumber":"55684421"
 }
+
+###
+GET {{local}}/file-logger

@@ -85,11 +85,13 @@ const userSchema = new mongoose.Schema({
       type: String,
       maxlength: 1024,
       default: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      set: (v) => (v === "" ? undefined : v),
     },
     alt: {
       type: String,
       maxlength: 1024,
       default: "Profile",
+      set: (v) => (v === "" ? undefined : v),
     },
   },
   isBusiness: {

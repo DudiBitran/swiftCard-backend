@@ -42,11 +42,13 @@ const cardSchema = new mongoose.Schema({
       type: String,
       maxlength: 1024,
       default: "https://www.wearegecko.co.uk/media/50316/mountain-3.jpg",
+      set: (v) => (v === "" ? undefined : v),
     },
     alt: {
       type: String,
       maxlength: 1024,
       default: "Business image",
+      set: (v) => (v === "" ? undefined : v),
     },
   },
   address: {
@@ -152,7 +154,7 @@ const Validation = {
     alt: Joi.string()
       .min(2)
       .max(1024)
-      .default("Profile")
+      .default("Business Image")
       .allow("")
       .label("Alt image"),
   }).optional(),
