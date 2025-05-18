@@ -1,6 +1,13 @@
 const { createLogger, format, transports } = require("winston");
 const DailyRotateFile = require("winston-daily-rotate-file");
 const path = require("path");
+const fs = require("fs");
+
+const logsDir = path.join(__dirname, "../logs");
+
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir, { recursive: true });
+}
 
 const logger = createLogger({
   level: "info",
