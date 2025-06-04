@@ -66,16 +66,21 @@ This project highlights my ability to build full-stack applications with a focus
 
 ---
 
-For full API documentation, see the endpoints.md file, which includes full URLs like:
+---
 
-POST https://your-domain.com/swift-card/users
+For full API documentation, see the [`endpoints.md`](./endpoints.md) file, which includes full URLs like:
 
-POST https://your-domain.com/swift-card/users/login
+- `POST https://your-domain.com/swift-card/users`
+- `POST https://your-domain.com/swift-card/users/login`
+- `GET https://your-domain.com/swift-card/cards`
+- `PATCH https://your-domain.com/swift-card/cards/:id`
 
-GET https://your-domain.com/swift-card/cards
+Replace `https://your-domain.com` with your actual deployed API base URL.
 
-PATCH https://your-domain.com/swift-card/cards/:id
+---
 
-Replace https://your-domain.com with your actual deployed API base URL.
+**Author:** Dudi Bitran  
+**GitHub:** [https://github.com/DudiBitran](https://github.com/DudiBitran)
+
 
 Thank you for reviewing my project. Feel free to explore the code and reach out for any questions or collaboration opportunities.
