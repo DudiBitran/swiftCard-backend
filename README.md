@@ -66,4 +66,16 @@ This project highlights my ability to build full-stack applications with a focus
 
 ---
 
+For full API documentation, see the endpoints.md file, which includes full URLs like:
+
+POST https://your-domain.com/swift-card/users
+
+POST https://your-domain.com/swift-card/users/login
+
+GET https://your-domain.com/swift-card/cards
+
+PATCH https://your-domain.com/swift-card/cards/:id
+
+Replace https://your-domain.com with your actual deployed API base URL.
+
 Thank you for reviewing my project. Feel free to explore the code and reach out for any questions or collaboration opportunities.
