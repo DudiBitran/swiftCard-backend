@@ -120,8 +120,8 @@ userSchema.set("toJSON", {
   transform: function (doc, ret) {
     delete ret.__v;
     delete ret.password;
-    delete loginAttempts;
-    delete lockUntil;
+    delete ret.loginAttempts;
+    delete ret.lockUntil;
     return ret;
   },
 });
@@ -151,7 +151,14 @@ const Validation = {
 
   email: Joi.string().email().min(6).max(255).required(),
 
-  password: Joi.string().min(8).max(1024).required(),
+  password: Joi.string()
+    .pattern(
+      new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z\\d]).{8,}$")
+    )
+    .message(
+      "Password must contain upper/lowercase letters, a number, and a special character"
+    )
+    .required(),
 
   address: Joi.object({
     state: Joi.string()

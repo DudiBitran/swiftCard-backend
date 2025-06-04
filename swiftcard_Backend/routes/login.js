@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const fileLogger = require("../fileLogger/fileLogger");
 const { User, signInValidation } = require("../model/user");
 const logger = require("../fileLogger/fileLogger");
 
@@ -50,10 +49,8 @@ router.post("/", async (req, res) => {
 
     if (user.loginAttempts >= 3) {
       user.lockUntil = new Date(Date.now() + 24 * 60 * 60 * 1000);
-      res.status(400);
-      logger.warn(
-        `status: ${res.statusCode} | Message: User account cooldown for 24 hours`
-      );
+
+      logger.warn(`status: 400 | Message: User account cooldown for 24 hours`);
     }
     await user.save();
 

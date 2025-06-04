@@ -14,8 +14,8 @@ const customFormat =
 app.use(cors());
 app.use(morgan(customFormat));
 app.use(express.json());
-app.use("/swift-card/users", require("./routes/user"));
 app.use("/swift-card/users/login", require("./routes/login"));
+app.use("/swift-card/users", require("./routes/user"));
 app.use("/swift-card/cards", require("./routes/card"));
 
 const PORT = process.env.PORT ?? 3000;

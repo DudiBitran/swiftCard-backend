@@ -103,7 +103,7 @@ const cardSchema = new mongoose.Schema({
     required: true,
   },
   likes: {
-    type: Array,
+    type: [mongoose.Schema.Types.ObjectId],
     required: true,
     default: [],
   },
@@ -138,7 +138,7 @@ const Validation = {
     .required(),
   web: Joi.string()
     .uri({ scheme: ["http", "https"] })
-    .min(11)
+    .min(14)
     .max(1024)
     .allow("", null)
     .label("Website"),

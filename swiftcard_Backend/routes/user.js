@@ -120,12 +120,11 @@ router.put("/:id", authMw, async (req, res) => {
   }
 
   // process
-  await User.updateOne(
-    { _id: req.user._id },
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user._id,
     { $set: req.body },
     { new: true, runValidators: true }
   );
-  const updatedUser = await User.findById(req.user._id);
   // response
 
   res.send(updatedUser);
@@ -144,7 +143,7 @@ router.patch("/:id", authMw, async (req, res) => {
     return;
   }
   // system validation
-  const user = await User.findById({ _id: req.user._id });
+  const user = await User.findById(req.user._id);
   if (!user) {
     res.status(400).send("User not found.");
     logger.error(`Status: ${res.statusCode} | Message: User not found.`);
@@ -152,7 +151,7 @@ router.patch("/:id", authMw, async (req, res) => {
   }
   // process
   const userStatusUpdated = await User.findByIdAndUpdate(
-    { _id: req.params.id },
+    req.params.id,
     { $set: { isBusiness: !user.isBusiness } },
     { new: true, runValidators: true }
   );
@@ -172,14 +171,14 @@ router.delete("/:id", authMw, async (req, res) => {
     return;
   }
   // system validation
-  const user = await User.findById({ _id: req.user._id });
+  const user = await User.findById(req.params.id);
   if (!user) {
     res.status(400).send("User not found.");
     logger.error(`status: ${res.statusCode} | Message: User not found.`);
     return;
   }
   // process
-  const deletedUser = await User.findByIdAndDelete({ _id: req.user._id });
+  const deletedUser = await User.findByIdAndDelete(req.params.id);
   // response
   res.send(deletedUser);
   logger.info(

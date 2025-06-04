@@ -110,7 +110,7 @@ router.put("/:id", authMw, async (req, res) => {
     logger.error(`status: ${res.statusCode} | Message: No card found.`);
     return;
   }
-  if (card.user_id.toString() === req.user._id) {
+  if (card.user_id.toString() !== req.user._id) {
     res.status(400).send("Access denied.");
     logger.error(`status: ${res.statusCode} | Message: Access denied.`);
     return;
