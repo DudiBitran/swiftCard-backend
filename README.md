@@ -51,7 +51,6 @@ This project highlights my ability to build full-stack applications with a focus
 
 ## How to Run
 
-
 1. Clone the repository:  
    `git clone https://github.com/DudiBitran/swiftCard-backend.git`  
 2. Navigate into the project folder:  
@@ -64,7 +63,10 @@ This project highlights my ability to build full-stack applications with a focus
 6. Run `npm run data` to load the initial data  
 7. Run `npm run dev` to start the server with nodemon  
 
----
+## Database Configuration
+
+The project is currently connected to **MongoDB Atlas** by default.  
+To switch to a local MongoDB instance, simply update the `MONGO_URI` value in your `.env` file to point to your local MongoDB connection string (e.g., `mongodb://localhost:27017/swift-card`).
 
 ---
 
@@ -81,6 +83,3 @@ Replace `https://your-domain.com` with your actual deployed API base URL.
 
 **Author:** Dudi Bitran  
 **GitHub:** [https://github.com/DudiBitran](https://github.com/DudiBitran)
-
-
-Thank you for reviewing my project. Feel free to explore the code and reach out for any questions or collaboration opportunities.
